@@ -14,7 +14,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/documents")
-@CrossOrigin(origins = "*") // Allows your React frontend to connect
+@CrossOrigin(origins = {"http://localhost:5173", "https://document-parser-ui.vercel.app"})
+//@CrossOrigin(origins = "*") // Allows your React frontend to connect
 public class DocumentController {
 
     private final DocumentService documentService;
