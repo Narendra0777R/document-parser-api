@@ -1,7 +1,9 @@
 package com.example.document_api.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "documents")
@@ -81,6 +83,11 @@ public class DocumentMetadata {
     @Column(name = "extracted_text", columnDefinition = "LONGTEXT")
     private String extractedText;
 
+ // Automatically set timestamp right before saving to DB
+    @PrePersist
+    protected void onCreate() {
+        this.uploadDate = LocalDateTime.now();
+    }
     // You need an empty constructor for Hibernate to work
     public DocumentMetadata() {
     }
