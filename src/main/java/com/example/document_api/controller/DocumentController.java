@@ -8,46 +8,54 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/documents")
-@CrossOrigin(origins = "*") // Crucial for when you eventually build a React frontend
+@CrossOrigin(origins = "*") // Allows your React frontend to connect
 public class DocumentController {
 
     private final DocumentService documentService;
-    private final DocumentRepository documentRepository;
+    private final DocumentRepository documentRepository; // Needed for the GET endpoint
 
+    // Injecting both the Service and the Repository
     public DocumentController(DocumentService documentService, DocumentRepository documentRepository) {
         this.documentService = documentService;
         this.documentRepository = documentRepository;
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<?> uploadDocument(@RequestParam("file") MultipartFile file) {
-        // Validate that the user actually sent a file
-        if (file.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: File is empty.");
+    @PostMapping("/upload-bulk")
+    public ResponseEntity<?> uploadBulkDocuments(
+            @RequestParam("file") List<MultipartFile> files,
+            // Catches the language string sent from React's FormData
+            @RequestParam(value = "language", defaultValue = "eng") String language) {
+        
+        List<DocumentMetadata> processedDocuments = new ArrayList<>();
+        List<String> errors = new ArrayList<>();
+        
+        for (MultipartFile file : files) {
+            try {
+                // Pass the file and the user's selected language to the Service
+                DocumentMetadata metadata = documentService.processAndSaveDocument(file, language);
+                processedDocuments.add(metadata);
+            } catch (Exception e) {
+                errors.add("Failed to process " + file.getOriginalFilename() + ": " + e.getMessage());
+            }
         }
         
-        // Validate that the file is actually a PDF
-        if (file.getOriginalFilename() == null || !file.getOriginalFilename().toLowerCase().endsWith(".pdf")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: Only PDF files are supported.");
+        // If everything failed, return a Bad Request with the list of errors
+        if (processedDocuments.isEmpty() && !errors.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 
-        try {
-            // Hand the file off to the brain of the app (the Service)
-            DocumentMetadata savedMetadata = documentService.processAndSaveDocument(file);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedMetadata);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error processing file: " + e.getMessage());
-        }
+        // Return the successfully processed files with a 201 CREATED status
+        return ResponseEntity.status(HttpStatus.CREATED).body(processedDocuments);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getDocumentMetadata(@PathVariable Long id) {
-        // Ask the database for the document using its ID
         Optional<DocumentMetadata> document = documentRepository.findById(id);
         
         if (document.isPresent()) {

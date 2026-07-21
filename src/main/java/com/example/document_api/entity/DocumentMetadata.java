@@ -67,6 +67,12 @@ public class DocumentMetadata {
 
     @Column(name = "word_count")
     private Integer wordCount;
+    
+    @Column(columnDefinition = "TEXT")
+    private String detectedEmails;
+
+    @Column(columnDefinition = "TEXT")
+    private String detectedPhones;
 
     @Column(name = "file_size_kb")
     private Long fileSizeKb;
@@ -79,6 +85,22 @@ public class DocumentMetadata {
     public DocumentMetadata() {
     }
 
-    // --- GETTERS AND SETTERS GO HERE ---
+	public String getDetectedEmails() {
+		return detectedEmails;
+	}
+
+	public void setDetectedEmails(String detectedEmails) {
+		this.detectedEmails = detectedEmails;
+	}
+
+	public String getDetectedPhones() {
+		return detectedPhones;
+	}
+
+	public void setDetectedPhones(String detectedPhones) {
+		this.detectedPhones = detectedPhones;
+	}
+
+ 
 
 }
