@@ -13,7 +13,7 @@ This project features an automated data-mining engine that utilizes Regular Expr
 4. [Database Schema](#-database-schema)
 5. [Core Features & Logic](#-core-features--logic)
 6. [API Documentation](#-api-documentation)
-7. [Installation & Setup](#-installation--setup)
+7. [Installation & Setup](#-installation-&-setup)
 8. [Future Enhancements](#-future-enhancements)
 
 ---
@@ -166,7 +166,7 @@ Access the application at http://localhost:5173.
 ---
 
 ## 🔗 Related Repositories
-* **Frontend UI:** [View the React Frontend Repository Here](https://github.com/Narendra0777R/doucment-parser-ui.git)
+* **Frontend UI:** [View the React Frontend Repository Here](https://github.com/Narendra0777R/document-parser-ui)
 
 ---
-**&copy; 2026 Narendra0777.**
+**&copy; 2026 [Narendra0777](https://github.com/Narendra0777R).**
