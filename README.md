@@ -139,7 +139,7 @@ Partial/Full Failure (400 BAD REQUEST): Returns an array of error strings if fil
 
 
 
-Run the application:
+### Run the application:
 
 Bash
 mvn spring-boot:run
@@ -157,10 +157,16 @@ npm run dev
 Access the application at http://localhost:5173.
 
 ## 🔮 Future Enhancements
-* ** Authentication: Implement Spring Security with JWT to allow users to create accounts and manage their own isolated document repositories.
+* **Authentication:** Implement Spring Security with JWT to allow users to create accounts and manage their own isolated document repositories.
 
-* ** Export Functionality: Add endpoints to export the structured database records into downloadable CSV or Excel files.
+* **Export Functionality:** Add endpoints to export the structured database records into downloadable CSV or Excel files.
 
-* ** Multi-Language OCR Support: Expand the frontend UI to allow users to dynamically select from 100+ Tesseract-supported languages before uploading.
+* **Multi-Language OCR Support:** Expand the frontend UI to allow users to dynamically select from 100+ Tesseract-supported languages before uploading.
 
-* Developed with Java, Spring Boot, and React.
+---
+
+## 🔗 Related Repositories
+* **Frontend UI:** [View the React Frontend Repository Here](https://github.com/Narendra0777R/doucment-parser-ui.git)
+
+---
+**&copy; 2026 Narendra0777.**
