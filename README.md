@@ -115,44 +115,29 @@ Uploads multiple PDF files for processing and data extraction.
   ]
 Partial/Full Failure (400 BAD REQUEST): Returns an array of error strings if files fail to process.
 
-2. Get Document by ID
-Retrieves the metadata and extracted text for a specific document.
+---
 
-Endpoint: /api/v1/documents/{id}
+## ⚙️ Installation & Setup
 
-Method: GET
+### Prerequisites
+* Java 17+
+* Node.js & npm
+* MySQL Database (Local or Cloud)
+* **Tesseract OCR Installed Locally:**
+  * Windows: [Download Installer](https://github.com/UB-Mannheim/tesseract/wiki) (Install to `C:\Program Files\Tesseract-OCR`)
+  * Mac: `brew install tesseract`
+  * Linux: `sudo apt-get install tesseract-ocr`
 
-Success Response (200 OK): Returns the DocumentMetadata JSON object.
+### Backend Setup
+1. Clone the repository and open the backend folder in your IDE.
+2. Open `src/main/resources/application.properties` and add your database credentials:
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/your_db_name
+   spring.datasource.username=root
+   spring.datasource.password=your_password
+   spring.jpa.hibernate.ddl-auto=update
 
-Error Response (404 NOT FOUND): "Document not found with ID: {id}"
 
-⚙️ Installation & Setup
-Prerequisites
-Java 17+
-
-Node.js & npm
-
-MySQL Database (Local or Cloud)
-
-Tesseract OCR Installed Locally:
-
-Windows: Download Installer (Install to C:\Program Files\Tesseract-OCR)
-
-Mac: brew install tesseract
-
-Linux: sudo apt-get install tesseract-ocr
-
-Backend Setup
-Clone the repository and open the backend folder in your IDE.
-
-Open src/main/resources/application.properties and add your database credentials:
-
-Properties
-spring.datasource.url=jdbc:mysql://localhost:3306/your_db_name
-spring.datasource.username=root
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=update
-Set your Tesseract Data Path. Ensure you have an environment variable named TESSDATA_PREFIX pointing to your tessdata folder, or verify the fallback path in DocumentService.java matches your installation directory.
 
 Run the application:
 
@@ -171,11 +156,11 @@ Bash
 npm run dev
 Access the application at http://localhost:5173.
 
-🔮 Future Enhancements
-Authentication: Implement Spring Security with JWT to allow users to create accounts and manage their own isolated document repositories.
+## 🔮 Future Enhancements
+* ** Authentication: Implement Spring Security with JWT to allow users to create accounts and manage their own isolated document repositories.
 
-Export Functionality: Add endpoints to export the structured database records into downloadable CSV or Excel files.
+* ** Export Functionality: Add endpoints to export the structured database records into downloadable CSV or Excel files.
 
-Multi-Language OCR Support: Expand the frontend UI to allow users to dynamically select from 100+ Tesseract-supported languages before uploading.
+* ** Multi-Language OCR Support: Expand the frontend UI to allow users to dynamically select from 100+ Tesseract-supported languages before uploading.
 
-Developed with Java, Spring Boot, and React.
+* Developed with Java, Spring Boot, and React.
