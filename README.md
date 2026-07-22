@@ -5,6 +5,7 @@ A robust, Full-Stack web application engineered to automate the extraction of cr
 This project features an automated data-mining engine that utilizes Regular Expressions (Regex) to instantly locate, isolate, and extract contact information (emails and phone numbers) from highly unstructured text payloads.
 
 ---
+# Live Link: [Click Me](https://document-parser-ui.vercel.app/)
 
 ## 📑 Table of Contents
 1. [Project Overview](#-project-overview)
